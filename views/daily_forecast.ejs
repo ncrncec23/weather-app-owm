@@ -1,0 +1,21 @@
+<div class="accordion-item">
+    <h2 class="accordion-header">
+        <button class="accordion-button collapsed gap-2" type="button" data-bs-toggle="collapse"
+            data-bs-target="#flush-collapse<%= index %>" aria-expanded="false"
+            aria-controls="flush-collapse<%= index %>">
+            <img src="https://openweathermap.org/img/wn/10d@2x.png" alt="weat-icon" class="weat-icon-forecast" />
+            <div class="date">
+                Ned, 10. pros
+            </div>
+            <div class="cels fs-1">
+                23°C
+            </div>
+        </button>
+    </h2>
+    <!-- Body for the Day forcast-->
+    <div id="flush-collapse<%= index %>" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+        <div class="accordion-body">
+            <%- include("hourly_forecast") %>
+        </div>
+    </div>
+</div>
