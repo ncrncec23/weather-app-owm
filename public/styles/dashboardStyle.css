@@ -10,7 +10,7 @@ body {
 
     .search-form {
         display: flex;
-        max-width: 300px;
+        max-width: 70%;
         margin: 40px auto;
         border-radius: 30px;
         overflow: hidden;
@@ -258,7 +258,8 @@ body {
 
     .pressure,
     .humidity,
-    .cloudiness {
+    .cloudiness,
+    .wind-speed {
         border-radius: 20px;
         padding: 15px;
     }
@@ -283,13 +284,21 @@ body {
             0 4px 6px rgba(0, 0, 0, 0.15);
     }
 
+    .wind-speed {
+        background: url('../images/wind.jpg') no-repeat center center;
+        background-size: cover;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25),
+            0 4px 6px rgba(0, 0, 0, 0.15);
+    }
+
     .detailed-info {
         margin: 20px;
     }
 
     .pressure-title,
     .humidity-title,
-    .cloudiness-title {
+    .cloudiness-title,
+    .wind-title {
         font-family: "Staatliches", sans-serif;
         font-weight: 500;
         font-style: normal;
@@ -431,5 +440,72 @@ body {
 
     span>i {
         color: white;
+    }
+
+    .footer-text {
+        font-family: "Roboto", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 500;
+        font-size: 1rem;
+        color: #c0c0c0;
+        text-align: center;
+        margin: 0;
+        padding: 15px;
+    }
+
+    .footer-content {
+        background-color: #2c3b60;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25), 0 4px 6px rgba(0, 0, 0, 0.15);
+    }
+}
+
+@media (min-width: 794px) {
+    .display-current-weather {
+        width: 90%;
+    }
+}
+
+@media(min-width: 788px) {
+    .display-current-weather {
+        width: 90%;
+    }
+
+    .forecast-section {
+        border: 1px solid #e85b2d;
+        border-radius: 2rem;
+        width: 60%;
+        margin: 2rem;
+    }
+
+    .forecast-section-responsive {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .search-form {
+        max-width: 70%;
+    }
+
+    .search-input {
+        font-size: 1rem;
+    }
+
+    main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .laptop-responsive {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .current-weather,
+    .current-weather-card {
+        width: 100%;
     }
 }
