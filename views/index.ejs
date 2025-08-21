@@ -25,98 +25,91 @@
 
         <main>
             <div class="display-current-weather">
-                <div class="laptop-responsive">
-                    <!-- Content of current weather -->
-                    <div class="current-weather d-flex flex-column">
+                <!-- Content of current weather -->
+                <div class="current-weather d-flex flex-column">
 
-                        <!-- Current Weather icon and description -->
-                        <div class="weather-icon mb-4 d-flex flex-row justify-content-left align-items-center">
-                            <img src="https://openweathermap.org/img/wn/10d@2x.png" alt="weat-icon" class="weat-img" />
-                            <p class="description text-center m-0">Vedro</p>
-                        </div>
-
-                        <!-- Basic Weather information -->
-                        <div class="weather-info">
-
-                            <!-- City/Town name -->
-                            <h2 class="city-name staatliches-regular text-center mt-3">Sračinec</h2>
-
-                            <!-- Real temperature -->
-                            <div class="d-flex flex-row justify-content-center align-items-center gap-3">
-                                <p class="temperature text-center m-0">23°C </p>
-                            </div>
-
-                            <!-- Seems like temperature-->
-                            <p class="seems-like text-center mb-3">Čini se kao: 20°C</p>
-                        </div>
-
-                        <!-- Max and min temperature -->
-                        <div class="d-flex flex-row justify-content-between align-items-center gap-3 mt-3">
-                            <div class="max-temp w-100">
-                                <p class="description-max text-center">Max temp</p>
-                                <p class="temperature-max text-center">25°C</p>
-                            </div>
-                            <div class="min-temp w-100">
-                                <p class="description-min text-center">Min temp</p>
-                                <p class="temperature-min text-center">22°C</p>
-                            </div>
-                        </div>
+                    <!-- Current Weather icon and description -->
+                    <div class="weather-icon mb-4 d-flex flex-row justify-content-left align-items-center">
+                        <img src="https://openweathermap.org/img/wn/10d@2x.png" alt="weat-icon" class="weat-img" />
+                        <p class="description text-center m-0">Vedro</p>
                     </div>
 
-                    <div class="current-weather-card">
-                        <!-- Detailed weather information -->
-                        <h2 class="dwi">Meteorološki podaci</h2>
+                    <!-- Basic Weather information -->
+                    <div class="weather-info">
 
-                        <!-- Cards for humidity, presure and cloudiness -->
-                        <div
-                            class="detailed-info d-flex flex-column justify-content-between align-items-center mt-4 gap-2">
-                            <!-- Pressure -->
-                            <div class="pressure w-100 d-flex flex-row justify-content-center align-items-center gap-3">
-                                <i class="fas fa-gauge font-icons"></i>
-                                <p class="pressure-title m-0">Tlak</p>
-                                <p class="bg-value pres">1012 <span class="hpa">hPa</span></p>
-                            </div>
+                        <!-- City/Town name -->
+                        <h2 class="city-name staatliches-regular text-center mt-3">Sračinec</h2>
 
-                            <!-- Humidity -->
-                            <div class="humidity w-100 d-flex flex-row justify-content-center align-items-center gap-3">
-                                <i class="fas fa-droplet font-icons"></i>
-                                <p class="humidity-title m-0">Vlažnost</p>
-                                <p class="bg-value">60%</p>
-                            </div>
+                        <!-- Real temperature -->
+                        <div class="d-flex flex-row justify-content-center align-items-center gap-3">
+                            <p class="temperature text-center m-0">23°C </p>
+                        </div>
 
-                            <!-- Cloudiness -->
-                            <div
-                                class="cloudiness w-100 d-flex flex-row justify-content-center align-items-center gap-3">
-                                <i class="fas fa-cloud font-icons"></i>
-                                <p class="cloudiness-title m-0">Naoblaka</p>
-                                <p class="bg-value">20%</p>
-                            </div>
+                        <!-- Seems like temperature-->
+                        <p class="seems-like text-center mb-3">Čini se kao: 20°C</p>
+                    </div>
 
-                            <!-- Wind speed -->
-                            <div
-                                class="wind-speed w-100 d-flex flex-row justify-content-center align-items-center gap-3">
-                                <i class="fa-solid fa-wind font-icons"></i>
-                                <p class="wind-title m-0">Vjetar</p>
-                                <p class="bg-value">5 <span class="hpa">km/h</span></p>
-                            </div>
+                    <!-- Max and min temperature -->
+                    <div class="d-flex flex-row justify-content-between align-items-center gap-3 mt-3">
+                        <div class="max-temp w-100">
+                            <p class="description-max text-center">Max temp</p>
+                            <p class="temperature-max text-center">25°C</p>
+                        </div>
+                        <div class="min-temp w-100">
+                            <p class="description-min text-center">Min temp</p>
+                            <p class="temperature-min text-center">22°C</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="current-weather-card">
+                    <!-- Detailed weather information -->
+                    <h2 class="dwi">Meteorološki podaci</h2>
+
+                    <!-- Cards for humidity, presure and cloudiness -->
+                    <div class="detailed-info d-flex flex-column justify-content-between align-items-center mt-4 gap-2">
+                        <!-- Pressure -->
+                        <div class="pressure w-100 d-flex flex-row justify-content-center align-items-center gap-3">
+                            <i class="fas fa-gauge font-icons"></i>
+                            <p class="pressure-title m-0">Tlak</p>
+                            <p class="bg-value pres">1012 <span class="hpa">hPa</span></p>
+                        </div>
+
+                        <!-- Humidity -->
+                        <div class="humidity w-100 d-flex flex-row justify-content-center align-items-center gap-3">
+                            <i class="fas fa-droplet font-icons"></i>
+                            <p class="humidity-title m-0">Vlažnost</p>
+                            <p class="bg-value">60%</p>
+                        </div>
+
+                        <!-- Cloudiness -->
+                        <div class="cloudiness w-100 d-flex flex-row justify-content-center align-items-center gap-3">
+                            <i class="fas fa-cloud font-icons"></i>
+                            <p class="cloudiness-title m-0">Naoblaka</p>
+                            <p class="bg-value">20%</p>
+                        </div>
+
+                        <!-- Wind speed -->
+                        <div class="wind-speed w-100 d-flex flex-row justify-content-center align-items-center gap-3">
+                            <i class="fa-solid fa-wind font-icons"></i>
+                            <p class="wind-title m-0">Vjetar</p>
+                            <p class="bg-value">5 <span class="hpa">km/h</span></p>
                         </div>
                     </div>
                 </div>
 
 
                 <!-- Forecast section -->
-                <div class="forecast-section-responsive">
-                    <div class="forecast-section mt-4">
-                        <h2 class="forecast-title">Prognoza</h2>
-                        <!-- Daily forecast -->
-                        <div class="accordion accordion-flush" id="accordionFlushExample">
-                            <!-- Daily forecast items -->
-                            <%- include("daily_forecast", {index: "One" }) %>
-                                <%- include("daily_forecast", {index: "Two" }) %>
-                                    <%- include("daily_forecast", {index: "Three" }) %>
-                                        <%- include("daily_forecast", {index: "Four" }) %>
-                                            <%- include("daily_forecast", {index: "Five" }) %>
-                        </div>
+                <div class="forecast-section mt-4">
+                    <h2 class="forecast-title">Prognoza</h2>
+                    <!-- Daily forecast -->
+                    <div class="accordion accordion-flush" id="accordionFlushExample">
+                        <!-- Daily forecast items -->
+                        <%- include("daily_forecast", {index: "One" }) %>
+                            <%- include("daily_forecast", {index: "Two" }) %>
+                                <%- include("daily_forecast", {index: "Three" }) %>
+                                    <%- include("daily_forecast", {index: "Four" }) %>
+                                        <%- include("daily_forecast", {index: "Five" }) %>
                     </div>
                 </div>
             </div>

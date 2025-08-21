@@ -459,6 +459,30 @@ body {
     }
 }
 
+@media (min-width: 617px) {
+    .temperature {
+        font-size: 7rem;
+    }
+
+    .staatliches-regular {
+        font-size: 3rem;
+    }
+
+    .seems-like {
+        font-size: 2rem;
+    }
+
+    .temperature-max,
+    .temperature-min {
+        font-size: 3rem;
+    }
+
+    .description-min,
+    .description-max {
+        font-size: 1.5rem;
+    }
+}
+
 @media (min-width: 794px) {
     .display-current-weather {
         width: 90%;
@@ -467,20 +491,26 @@ body {
 
 @media(min-width: 788px) {
     .display-current-weather {
+        display: grid;
+        grid-template-columns: auto auto;
+        grid-template-rows: auto auto;
         width: 90%;
     }
 
     .forecast-section {
-        border: 1px solid #e85b2d;
-        border-radius: 2rem;
-        width: 60%;
         margin: 2rem;
+        grid-column: 2;
+        grid-row: 2;
     }
 
-    .forecast-section-responsive {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    .current-weather-card {
+        grid-column: 1;
+        grid-row: 2;
+    }
+
+    .current-weather {
+        grid-column: span 2;
+        grid-row: 1;
     }
 
     .search-form {
@@ -497,15 +527,25 @@ body {
         align-items: center;
     }
 
-    .laptop-responsive {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
+    .date {
+        font-size: 1.5rem;
     }
 
-    .current-weather,
-    .current-weather-card {
-        width: 100%;
+    .cels {
+        font-size: 3rem !important;
     }
+}
+
+.wind-speed,
+.humidity,
+.pressure,
+.cloudiness {
+    transition: transform 0.3s ease-in-out;
+}
+
+.wind-speed:hover,
+.humidity:hover,
+.pressure:hover,
+.cloudiness:hover {
+    transform: scale(1.05);
 }
