@@ -173,7 +173,8 @@ body {
     }
 
     .current-weather {
-        background: url('../images/SunnyDay.png') no-repeat center center;
+        --weather-bg: url('../images/SunnyDay.png');
+        background: var(--weather-bg) no-repeat center center;
         background-size: cover;
         border-radius: 20px;
         padding: 30px;
@@ -492,13 +493,18 @@ body {
 @media(min-width: 788px) {
     .display-current-weather {
         display: grid;
-        grid-template-columns: auto auto;
+        grid-template-columns: 1fr 1fr;
         grid-template-rows: auto auto;
         width: 90%;
     }
 
+    .degree-bold {
+        font-size: 1.5rem;
+    }
+
     .forecast-section {
-        margin: 2rem;
+        margin-top: 0 !important;
+        margin-bottom: 2rem;
         grid-column: 2;
         grid-row: 2;
     }
