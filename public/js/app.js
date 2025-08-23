@@ -57,7 +57,7 @@ L.control.layers({ "OSM": osmLayer, "Temperature": tempLayer }).addTo(map);
 function manipulateDOM(data) {
     document.getElementById("icon").setAttribute("src", `https://openweathermap.org/img/wn/${data.icon}@2x.png`);
     document.querySelector(".description").innerHTML = data.description;
-    document.querySelector(".city-name").innerHTML = data.name, data.country;
+    document.querySelector(".city-name").innerHTML = `${data.name}, ${data.country}`;
     document.querySelector(".temperature").innerHTML = data.temp + " °C";
     document.querySelector(".seems-like").innerHTML = `Čini se kao: ${data.feels_like}°C`;
     document.querySelector(".temperature-max").innerHTML = `${data.temp_max}°C`;
