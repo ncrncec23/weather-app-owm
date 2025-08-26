@@ -6,9 +6,7 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 const API_URL = 'https://api.openweathermap.org/data/2.5/'
-
-// Global variables
-let currentWeather;
+const GEO_API_URL = 'https://api.openweathermap.org/geo/1.0/'
 
 // Serving static files from the 'public' directory
 app.use(express.static('public'));
@@ -24,18 +22,47 @@ app.get('/', (req, res) => {
 
 // Route to render the main page
 app.get('/weather', (req, res) => {
-    if (!currentWeather) {
-        currentWeather = getDefaultWeather();
+    res.render("index.ejs", { weather: getDefaultWeather() });
+});
+
+app.post('/search', async (req, res) => {
+    const place = req.body.place;
+    try {
+        // Calling the Geocoding API to get the cordinates
+        const resGeo = await axios.get(`${GEO_API_URL}direct`, {
+            params: {
+                q: place,
+                limit: 1,
+                appid: process.env.API_KEY
+            }
+        })
+
+        // Getting the cordinates from response
+        const latitude = resGeo.data[0].lat;
+        const longitude = resGeo.data[0].lon;
+
+        // Making the API call by the coordinates
+        const currentWeather = await fetchWeatherByCoords(latitude, longitude);
+        currentWeather.lat = latitude;
+        currentWeather.lon = longitude;
+        res.json(currentWeather);
+    } catch (error) {
+        console.log(error.message);
+        res.json(getDefaultWeather());
     }
-    res.render("index.ejs", { weather: currentWeather });
 });
 
 // Route for making the API call and sending it back to fetch from the frontend.
 app.post('/location', async (req, res) => {
     const { latitude, longitude } = req.body;
+    const currentWeather = await fetchWeatherByCoords(latitude, longitude);
+    res.json(currentWeather);
+})
+
+app.post('/forecast', async (req, res) => {
+    const { latitude, longitude } = req.body;
     try {
-        // API Call by Axios to OpenWeatherMap API
-        const response = await axios.get(`${API_URL}weather`, {
+        const response = await axios.get(`${API_URL}forecast`, {
             params: {
                 lat: latitude,
                 lon: longitude,
@@ -44,12 +71,11 @@ app.post('/location', async (req, res) => {
                 lang: 'hr'
             }
         });
-        currentWeather = await handleResponse(response); // This part of code handles the creation of an object from axios response
-    } catch (error) {
-        console.log(error.message);
+
+    } catch (err) {
+        console.error(err.message);
     }
-    res.json(currentWeather);
-})
+});
 
 // Backend proxy for OpenWeatherMap temperature tiles
 app.get('/tiles/temp/:z/:x/:y.png', async (req, res) => {
@@ -130,6 +156,25 @@ async function handleResponse(response) {
         curTime: currentTime,
         name: response.data.name,
         country: response.data.sys.country
+    }
+}
+
+async function fetchWeatherByCoords(latitude, longitude) {
+    try {
+        // API call to the current location by latitude and longitude
+        const response = await axios.get(`${API_URL}weather`, {
+            params: {
+                lat: latitude,
+                lon: longitude,
+                appid: process.env.API_KEY,
+                units: 'metric',
+                lang: 'hr'
+            }
+        });
+        return await handleResponse(response);
+    } catch (error) {
+        console.log(error.message);
+        return getDefaultWeather();
     }
 }
 

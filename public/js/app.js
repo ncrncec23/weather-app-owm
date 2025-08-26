@@ -53,6 +53,28 @@ navigator.geolocation.getCurrentPosition(async (pos) => {
 // Integration of the layers to the map
 L.control.layers({ "OSM": osmLayer, "Temperature": tempLayer }).addTo(map);
 
+const form = document.getElementById("search-form");
+form.addEventListener("submit", async (e) => {
+    e.preventDefault(); // Preventing the default behavior of the form submission
+    const formData = new FormData(form);
+    const json = Object.fromEntries(formData.entries()); // Getting the form data as JSON object
+    try {
+        const response = await fetch('/search', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(json)
+        })
+        const data = await response.json(); // Getting the JSON response of the backend
+        addMarker(data.lat, data.lon, `Tvoja lokacija: ${data.name}`);
+        manipulateDOM(data); // Displaying elements by manipulating DOM
+        form.reset(); // Resetting the form
+    } catch (err) {
+        console.error(err.message);
+    }
+});
+
 // function for manipulating DOM after the fetch API call
 function manipulateDOM(data) {
     document.getElementById("icon").setAttribute("src", `https://openweathermap.org/img/wn/${data.icon}@2x.png`);
@@ -67,6 +89,7 @@ function manipulateDOM(data) {
     document.querySelectorAll(".bg-value")[2].innerHTML = `${data.cloudiness} %`
     document.querySelectorAll(".bg-value")[3].innerHTML = `${data.wind_speed} <span class="hpa">km/h</span>`
 
+    // Check if it is day or night to dynamically change the background
     if (data.curTime >= data.sunrise && data.curTime < data.sunset) {
         const url = "../images/SunnyDay.png";
         document.querySelector(".current-weather").style.setProperty("--weather-bg", `url(${url})`);
