@@ -27,29 +27,34 @@ app.get('/weather', (req, res) => {
 
 app.post('/search', async (req, res) => {
     const place = req.body.place;
-    try {
-        // Calling the Geocoding API to get the cordinates
-        const resGeo = await axios.get(`${GEO_API_URL}direct`, {
-            params: {
-                q: place,
-                limit: 1,
-                appid: process.env.API_KEY
-            }
-        })
+    // Calling the Geocoding API to get the cordinates
+    const { latitude, longitude } = await getCoordsByCity(place);
 
-        // Getting the cordinates from response
-        const latitude = resGeo.data[0].lat;
-        const longitude = resGeo.data[0].lon;
+    // Making the API call by the coordinates
+    const currentWeather = await fetchWeatherByCoords(latitude, longitude);
+    currentWeather.lat = latitude;
+    currentWeather.lon = longitude;
+    res.json(currentWeather);
+});
 
-        // Making the API call by the coordinates
-        const currentWeather = await fetchWeatherByCoords(latitude, longitude);
-        currentWeather.lat = latitude;
-        currentWeather.lon = longitude;
-        res.json(currentWeather);
-    } catch (error) {
-        console.log(error.message);
-        res.json(getDefaultWeather());
-    }
+app.post('/search-forecast', async (req, res) => {
+    const place = req.body.place;
+    const coords = await getCoordsByCity(place);
+    if (!coords) return res.status(404).json({ error: "Grad nije pronađen" });
+
+    const forecastData = await fetchForecastByCoords(coords.latitude, coords.longitude);
+    if (!forecastData) return res.status(500).json({ error: "Forecast nije dostupan" });
+
+    // Grupiranje po danima i filtriranje sati 9-21
+    const forecastByDay = {};
+    forecastData.data.list.forEach(el => {
+        const date = el.dt_txt.split(" ")[0];
+        const hour = parseInt(el.dt_txt.split(" ")[1].split(":")[0]);
+        if (!forecastByDay[date]) forecastByDay[date] = [];
+        if (hour >= 9 && hour <= 21) forecastByDay[date].push(el);
+    });
+
+    res.json(forecastByDay);
 });
 
 // Route for making the API call and sending it back to fetch from the frontend.
@@ -61,20 +66,22 @@ app.post('/location', async (req, res) => {
 
 app.post('/forecast', async (req, res) => {
     const { latitude, longitude } = req.body;
-    try {
-        const response = await axios.get(`${API_URL}forecast`, {
-            params: {
-                lat: latitude,
-                lon: longitude,
-                appid: process.env.API_KEY,
-                units: 'metric',
-                lang: 'hr'
-            }
-        });
+    const response = await fetchForecastByCoords(latitude, longitude);
+    const forecastByDay = {};
 
-    } catch (err) {
-        console.error(err.message);
-    }
+    // Grouping the forecast data by day and filtering hours between 9 and 21
+    response.data.list.forEach(element => {
+        const date = element.dt_txt.split(" ")[0];
+        const hour = parseInt(element.dt_txt.split(" ")[1].split(":")[0]);
+        if (!forecastByDay[date]) {
+            forecastByDay[date] = [];
+        }
+        if (hour >= 9 && hour <= 21) {
+            forecastByDay[date].push(element);
+        }
+    });
+
+    res.json(forecastByDay);
 });
 
 // Backend proxy for OpenWeatherMap temperature tiles
@@ -124,6 +131,7 @@ function getDefaultWeather() {
     }
 }
 
+// Function to handle the response from the Current Weather Data API
 async function handleResponse(response) {
     // Making the first letter in description uppercase
     let desc = response.data.weather[0].description;
@@ -159,6 +167,7 @@ async function handleResponse(response) {
     }
 }
 
+// Function to fetch weather by coordinates
 async function fetchWeatherByCoords(latitude, longitude) {
     try {
         // API call to the current location by latitude and longitude
@@ -175,6 +184,45 @@ async function fetchWeatherByCoords(latitude, longitude) {
     } catch (error) {
         console.log(error.message);
         return getDefaultWeather();
+    }
+}
+
+// Function to get coordinates by city name using Geocoding API
+async function getCoordsByCity(city) {
+    try {
+        const resGeo = await axios.get(`${GEO_API_URL}direct`, {
+            params: {
+                q: city,
+                limit: 1,
+                appid: process.env.API_KEY
+            }
+        });
+        return {
+            latitude: resGeo.data[0].lat,
+            longitude: resGeo.data[0].lon
+        };
+    } catch (error) {
+        console.log(error.message);
+        return null;
+    }
+}
+
+// Function to fetch forecast by coordinates
+async function fetchForecastByCoords(latitude, longitude) {
+    try {
+        const response = await axios.get(`${API_URL}forecast`, {
+            params: {
+                lat: latitude,
+                lon: longitude,
+                appid: process.env.API_KEY,
+                units: 'metric',
+                lang: 'hr'
+            }
+        });
+        return response;
+    } catch (error) {
+        console.log(error.message);
+        return null;
     }
 }
 

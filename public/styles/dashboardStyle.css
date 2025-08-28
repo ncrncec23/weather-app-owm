@@ -8,6 +8,11 @@ body {
         height: auto;
     }
 
+    .hour-description {
+        font-size: 1.5rem;
+        color: #f9a826;
+    }
+
     .search-form {
         display: flex;
         max-width: 70%;

@@ -1,32 +1,33 @@
 <!-- Body of the weather forecast -->
-<p class="fs-1">Nedelja, 10. prosinca 2025.</p>
+<p class="fs-1 long-date">Nedelja, 10. prosinca 2025.</p>
+<p class="hour-description">Vedro</p>
 <p class="trihfc"><i class="fa-solid fa-clock me-2"></i> Satna prognoza</p>
 <!-- Hourly forecast cards -->
 <div class="hourly-scroll d-flex flex-row justify-content-between align-items-center mt-3 gap-1">
     <div class="card-border flex-fill d-flex flex-column justify-content-center align-items-center">
         <p class="hours text-center">9:00</p>
-        <p class="text-center degree-bold">23°C</p>
-        <img src="https://openweathermap.org/img/wn/10d@2x.png" alt="weat-icon" width="40" height="40" />
+        <p class="text-center degree-bold">0°C</p>
+        <img src="" alt="weat-icon" width="40" height="40" class="f-ico" />
     </div>
     <div class="card-border flex-fill d-flex flex-column justify-content-center align-items-center">
         <p class="hours">12:00</p>
-        <p class="text-center degree-bold">22°C</p>
-        <img src="https://openweathermap.org/img/wn/10d@2x.png" alt="weat-icon" width="40" height="40" />
+        <p class="text-center degree-bold">0°C</p>
+        <img src="" alt="weat-icon" width="40" height="40" class="f-ico" />
     </div>
     <div class="card-border flex-fill d-flex flex-column justify-content-center align-items-center">
         <p class="hours">15:00</p>
-        <p class="text-center degree-bold">20°C</p>
-        <img src="https://openweathermap.org/img/wn/10d@2x.png" alt="weat-icon" width="40" height="40" />
+        <p class="text-center degree-bold">0°C</p>
+        <img src="" alt="weat-icon" width="40" height="40" class="f-ico" />
     </div>
     <div class="card-border flex-fill d-flex flex-column justify-content-center align-items-center">
         <p class="hours">18:00</p>
-        <p class="text-center degree-bold">32°C</p>
-        <img src="https://openweathermap.org/img/wn/10d@2x.png" alt="weat-icon" width="40" height="40" />
+        <p class="text-center degree-bold">0°C</p>
+        <img src="" alt="weat-icon" width="40" height="40" class="f-ico" />
     </div>
     <div class="card-border flex-fill d-flex flex-column justify-content-center align-items-center">
         <p class="hours">21:00</p>
-        <p class="text-center degree-bold">12°C</p>
-        <img src="https://openweathermap.org/img/wn/10d@2x.png" alt="weat-icon" width="40" height="40" />
+        <p class="text-center degree-bold">0°C</p>
+        <img src="" alt="weat-icon" width="40" height="40" class="f-ico" />
     </div>
 </div>
 
@@ -37,19 +38,21 @@
 <div class="row my-3 ">
     <div class="col-auto d-flex flex-column gap-2">
         <p class="mb-0 detailed-wheater-report"><span class="bold-t"><i class="fa-solid fa-wind me-2"></i>
-                Vjetar:</span> 5
-            km/h</p>
+                Vjetar:</span> <span class="wind_speed">5 km/h</span>
+        </p>
         <p class="mb-0 detailed-wheater-report"><span class="bold-t"><i class="fa-solid fa-tachometer-alt me-2"></i>
-                Tlak:</span> 1012 hPa</p>
+                Tlak:</span> <span class="pressure-ground">1012 hPa</span></p>
         <p class="mb-0 detailed-wheater-report"><span class="bold-t"> <i class="fa-solid fa-cloud-rain me-2"></i>
-                Oborina:</span> 0 mm</p>
+                Oborina(3h):</span> <span class="rain-level">0 mm</span></p>
     </div>
     <div class="col-auto d-flex flex-column gap-2 justify-content-start">
         <p class="mb-0 detailed-wheater-report"><span class="bold-t"><i class="fa-solid fa-droplet me-2"></i>
                 Vlažnost:</span>
-            60%</p>
+            <span class="humidity-level">60%</span>
+        </p>
         <p class="mb-0 detailed-wheater-report"><span class="bold-t"><i class="fa-solid fa-cloud me-2"></i>
                 Naoblaka:</span>
-            20%</p>
+            <span class="cloudiness-level">20%</span>
+        </p>
     </div>
 </div>
