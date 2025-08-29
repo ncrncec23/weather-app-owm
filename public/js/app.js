@@ -90,11 +90,9 @@ form.addEventListener("submit", async (e) => {
 
         const data = await response.json(); // Getting the JSON response of the backend
         const forecastData = await responseForecast.json(); // Getting the JSON forecastData of the backend
-        console.log(forecastData);
         addMarker(data.lat, data.lon, `Tvoja lokacija: ${data.name}`);
         manipulateDOM(data); // Displaying elements by manipulating DOM
         manipulateForecastDOM(forecastData); // Displaying forecast data by manipulating DOM
-        console.log("Proso sam");
         form.reset(); // Resetting the form
     } catch (err) {
         console.error(err.message);
@@ -145,7 +143,8 @@ function manipulateForecastDOM(forecastData) {
         item.querySelector(".pressure-ground").innerHTML = `${target.main.pressure} hPa`;
         item.querySelector(".humidity-level").innerHTML = `${target.main.humidity} %`;
         item.querySelector(".cloudiness-level").innerHTML = `${target.clouds.all} %`;
-        item.querySelector(".rain-level").innerHTML = target.rain ? `${target.rain["3h"]} mm` : "0 mm";
+        const rain = target.rain?.["3h"] ?? target.rain?.["1h"] ?? 0;
+        item.querySelector(".rain-level").innerHTML = `${rain} mm`;
 
         const now = new Date();
         const todayKey = now.toISOString().split("T")[0]; // npr. "2025-08-28"
@@ -166,12 +165,8 @@ function manipulateForecastDOM(forecastData) {
                 );
                 if (forecast) {
                     tempEl.innerHTML = `${Math.round(forecast.main.temp)}°C`;
-                    if (iconEl) {
-                        iconEl.src = `https://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png`;
-                        iconEl.alt = forecast.weather[0].description;
-                    }
-                } else {
-                    iconEl.remove(); // Remove icon if no forecast is found
+                    iconEl.src = `https://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png`;
+                    iconEl.alt = forecast.weather[0].description;
                 }
             } else {
                 forecast = forecastData[dateKey].find(el =>
