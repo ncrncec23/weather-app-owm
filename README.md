@@ -14,25 +14,37 @@ This application is built in the Node.js and Express framework. EJS is the templ
     To run the following commands, you need to have Git installed on your local machine.  If you don't have it, download it [here](https://git-scm.com/downloads).
 
    Open VS code terminal or git bash and enter this commands
- ```
- git clone https://github.com/ncrncec23/weather-app-owm.git
+     ```bash
+       git clone https://github.com/ncrncec23/weather-app-owm.git # Clone the repository from github
     
- cd <name-of-your-folder>
-```    
-4. **Installing dependencies and running Node.js app**
+       cd <name-of-your-folder> # Change name_of_your_folder to your folder name
+    ```    
+3. **Installing dependencies and running Node.js app**
 
     First you need to install Node if you don't already have it. Install it [here](https://nodejs.org/en)
    
     Check the version if anything pops up it's ok. If not you have not installed it correctly
-```
- node -v
- npm -v
-```
-
-   To install dependencies
+    ```bash
+       node -v # Checks the node version
+       npm -v # Checks the node package manager version
+    ```
+   To install dependencies run
+   ```bash
+       npm i # Install dependencies
+   ```
+   Create .env file and save your API_KEY in the file
+   ```bash
+       touch .env # Creating the .env file
+       API_KEY="<your_api_key>" # Enter your API_KEY in this format
+   ```
+   After creating .env you can run the application by entering
+   ```bash
+       nodemon index.js 
+       # OR
+       node index.js
    ```
        
-       
+
 
 
 
